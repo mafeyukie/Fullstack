@@ -1,0 +1,29 @@
+body{
+font-size: 120t;
+    background-color: pink;
+    text-align: right;
+}
+
+p{
+    color: black;
+    font-size: 20pt;
+    text-align: left;
+}
+
+
+#girafa{
+    color:yellow
+}
+
+.girafinha{
+    color: purple
+}
+
+a:hover{
+    color:aqua
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
