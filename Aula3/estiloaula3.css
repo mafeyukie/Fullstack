@@ -1,0 +1,102 @@
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: bisque;
+    border: solid 4px blue;
+}
+
+body{
+    background-color: lightgray;
+    text-align: center;
+}
+.solid {
+    border-style: solid;
+}
+
+.inline{
+    display: inline;
+}
+
+.sublinks {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    align-items: center;
+    background-color: rgb(153, 206, 255);
+    color: red
+}
+
+.vermelho{
+    color: red;
+    font-weight: bold;
+}
+.vermelho:hover{
+    color: darkred;
+}
+
+.textos{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.roxo{
+    color: indigo
+}
+
+.livros {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.videoemaps{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+table,tr,td,th{
+    /* display: flex; */
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    border-color: red;
+    border-style: dashed;
+    /* margin: 0; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.colornames{
+    color: red;
+}
+
+.tabelaamarela{
+    display: block;
+    justify-content: space-around;
+    align-items: center;
+    background: yellow ;
+    width: 500px;
+    height: 150px;
+    padding: 20px;
+    border: 5px solid yellow;
+    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rodape {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: bisque;
+}
+
+.espacador{
+    padding-left: 50px;
+    color: red
+}
