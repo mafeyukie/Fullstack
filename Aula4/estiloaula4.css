@@ -89,3 +89,22 @@
     justify-content: space-around;
     flex-direction: row;
 }
+
+.cabeca {
+    display: flex;
+    background-color: white;
+    text-align: left;
+    justify-content: center;
+    gap: 30px;
+    color: gray;
+    padding-right: 220px;
+    font-size: small;
+    padding-top: 5px;
+    border-bottom: 2px;
+    border-color: black;
+}
+
+.grifado {
+    color: white;
+    background-color: red;
+}
