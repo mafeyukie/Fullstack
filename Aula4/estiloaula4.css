@@ -73,21 +73,36 @@
 .escritosEmVermelho{
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     background-color: red;
     color: white;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .flexDirectionColumn{
     display: flex;
     flex-direction: column;
     background-color: red;
-    margin-right: 70%;
+    /* margin-right: 70%; */
 }
 
 .noticiasPrincipais{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-direction: row;
+    flex-wrap: nowrap;
+    padding-left: 10%;
+    gap: 5%;
+}
+.menu2correio{
+    display: flex;
+    justify-content: space-between;
+}
+
+.divisorMenu{
+    display: flex;
+    flex-direction: column;
 }
 
 .cabeca {
@@ -108,3 +123,17 @@
     color: white;
     background-color: red;
 }
+
+.segundaimagem {
+    display: flex;
+    justify-content: left;
+}
+
+.noticiasSecundarias{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+
