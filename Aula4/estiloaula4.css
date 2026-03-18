@@ -93,7 +93,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     padding-left: 10%;
-    gap: 5%;
+    gap: 2%;
 }
 .menu2correio{
     display: flex;
@@ -133,6 +133,28 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.textosegundaimagem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: white;
+    color: red;
+    padding-left:3%;
+    padding-right: 3%;
+}
+
+.cinza {
+    display: flex;
+    color: gray;
+    text-size-adjust: 3px;
+}
+
+.lado {
+    display: flex;
+
+
 }
 
 
