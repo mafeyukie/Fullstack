@@ -1,0 +1,161 @@
+
+
+.vermelho{
+    color:black
+    font-weight bold
+}
+
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border: solid 4px rgba(110, 110, 110, 0.767);
+}
+
+.correio {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.infor {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-ends;
+}
+
+.textos{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: red;
+    
+}
+
+.tabelaamarela{
+    display: block;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: red ;
+    width: 580px;
+    height:140px;
+    padding: 20px;
+    margin: -3px;
+    color: white;
+}
+
+.tabelavermelha{
+    display: flex;
+    flex-direction:column;
+}
+
+.tabelainfor{
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    background-color: white;
+    text-align: right;
+    justify-content: right;
+    gap: 30px;
+    color: gray;
+    padding-right: 220px;
+    font-size: small;
+    padding-top: 5px;
+    border-bottom: 2px;
+    border-color: black;
+}
+
+.escritosEmVermelho{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: red;
+    color: white;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.flexDirectionColumn{
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    /* margin-right: 70%; */
+}
+
+.noticiasPrincipais{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding-left: 10%;
+    gap: 2%;
+}
+.menu2correio{
+    display: flex;
+    justify-content: space-between;
+}
+
+.divisorMenu{
+    display: flex;
+    flex-direction: column;
+}
+
+.cabeca {
+    display: flex;
+    background-color: white;
+    text-align: left;
+    justify-content: center;
+    gap: 30px;
+    color: gray;
+    padding-right: 220px;
+    font-size: small;
+    padding-top: 5px;
+    border-bottom: 2px;
+    border-color: black;
+}
+
+.grifado {
+    color: white;
+    background-color: red;
+}
+
+.segundaimagem {
+    display: flex;
+    justify-content: left;
+}
+
+.noticiasSecundarias{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.textosegundaimagem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: white;
+    color: red;
+    padding-left:3%;
+    padding-right: 3%;
+}
+
+.cinza {
+    display: flex;
+    color: gray;
+    text-size-adjust: 3px;
+}
+
+.lado {
+    display: flex;
+
+
+}
+
+
+
