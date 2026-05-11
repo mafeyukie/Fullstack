@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Novo Post</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="form-page">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">my<em>blog</em></span>
+      <nav>
+        <a href="/">Projects</a>
+        <a href="/blog">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="form-main">
+    <div class="form-card">
+
+      <div class="form-card-header">
+        <span class="form-icon">✍️</span>
+        <h1>Novo Post</h1>
+        <p>Preencha os campos e publique sua ideia.</p>
+      </div>
+
+      <form action="/cadastrar_post" method="POST" class="post-form">
+
+        <div class="field-group">
+          <label for="titulo">Título</label>
+          <input
+            type="text"
+            id="titulo"
+            name="titulo"
+            placeholder="Um título chamativo..."
+            required
+            maxlength="120"
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="resumo">Resumo</label>
+          <input
+            type="text"
+            id="resumo"
+            name="resumo"
+            placeholder="Uma frase que resume o post..."
+            required
+            maxlength="250"
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="conteudo">Conteúdo</label>
+          <textarea
+            id="conteudo"
+            name="conteudo"
+            rows="8"
+            placeholder="Escreva o conteúdo completo do post aqui..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <a href="/blog" class="btn-cancel">Cancelar</a>
+          <button type="submit" class="btn-submit">Publicar Post</button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Node.js · EJS · SQLite</p>
+  </footer>
+
+</body>
+</html>

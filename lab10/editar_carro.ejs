@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editar Carro</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">my<span>Carros</span></span>
+      <nav class="header-nav">
+        <a href="/">Projects</a>
+        <a href="/carros">Catálogo</a>
+        <a href="/gerencia" class="active">Gerência</a>
+      </nav>
+      <div class="header-user">
+        Olá, <strong><%= usuario.nome.split(' ')[0] %></strong>
+        <a href="/logout" class="btn-logout">Sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-title">Editar <span>Carro</span></div>
+    <p class="page-sub"><%= carro.marca %> <%= carro.modelo %> — ID #<%= carro.id %></p>
+
+    <div class="form-card" style="max-width:680px">
+      <form action="/carros/atualizar/<%= carro.id %>" method="POST">
+        <div class="form-grid" style="margin-bottom:1.5rem">
+          <div class="field">
+            <label for="marca">Marca</label>
+            <input type="text" id="marca" name="marca" value="<%= carro.marca %>" required/>
+          </div>
+          <div class="field">
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" name="modelo" value="<%= carro.modelo %>" required/>
+          </div>
+          <div class="field">
+            <label for="ano">Ano</label>
+            <input type="number" id="ano" name="ano" value="<%= carro.ano %>" min="1900" max="2100" required/>
+          </div>
+          <div class="field">
+            <label for="qtde_disponivel">Qtde. disponível</label>
+            <input type="number" id="qtde_disponivel" name="qtde_disponivel" value="<%= carro.qtde_disponivel %>" min="0" required/>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:center">
+          <button type="submit" class="btn btn-primary">💾 Salvar alterações</button>
+          <a href="/gerencia" class="btn btn-outline">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">Node.js · EJS · SQLite</footer>
+</body>
+</html>

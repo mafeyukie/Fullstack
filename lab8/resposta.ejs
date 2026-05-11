@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resposta - <%= status %></title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body class="resposta-page">
+  <div class="auth-container">
+    <div class="auth-card resposta-card">
+      <div class="auth-header">
+
+        <% if (sucesso) { %>
+          <span class="auth-icon status-icon success-icon">✅</span>
+          <h1 class="status-titulo success-text">Login realizado!</h1>
+          <p class="status-msg">Bem-vindo(a), <strong><%= usuario %></strong>!</p>
+          <div class="status-badge success-badge">ACESSO PERMITIDO</div>
+        <% } else { %>
+          <span class="auth-icon status-icon error-icon">❌</span>
+          <h1 class="status-titulo error-text">Falha no login</h1>
+          <p class="status-msg">Usuário ou senha incorretos.</p>
+          <div class="status-badge error-badge">ACESSO NEGADO</div>
+        <% } %>
+
+      </div>
+
+      <div class="resposta-detalhes">
+        <p class="detalhe-linha">
+          <span class="detalhe-label">Status:</span>
+          <span class="detalhe-valor <%= sucesso ? 'success-text' : 'error-text' %>"><%= status %></span>
+        </p>
+        <p class="detalhe-linha">
+          <span class="detalhe-label">Usuário:</span>
+          <span class="detalhe-valor"><%= usuario || '—' %></span>
+        </p>
+        <p class="detalhe-linha">
+          <span class="detalhe-label">Horário:</span>
+          <span class="detalhe-valor"><%= hora %></span>
+        </p>
+      </div>
+
+      <div class="auth-footer">
+        <a href="/login" class="btn-primary" style="text-decoration:none; display:inline-block;">Tentar novamente</a>
+        <a href="/" class="back-link">← Voltar para projetos</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

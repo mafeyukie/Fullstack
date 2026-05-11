@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">my<span>Portfolio</span></span>
+      <nav class="header-nav">
+        <a href="/">Projects</a>
+        <a href="/carros">Carros</a>
+        <a href="/login" class="active">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <span class="auth-icon">🔐</span>
+      <h1 class="auth-title">Login</h1>
+      <p class="auth-sub">Acesse o painel de gerência.</p>
+
+      <script>
+        const p = new URLSearchParams(window.location.search);
+        if (p.get('erro') === 'invalido') {
+          document.write('<div class="alert alert-err">Login ou senha incorretos.</div>');
+        }
+        if (p.get('msg') === 'cadastrado') {
+          document.write('<div class="alert alert-ok">Cadastro realizado! Faça login.</div>');
+        }
+      </script>
+
+      <form action="/login" method="POST" class="auth-form">
+        <div class="field">
+          <label for="login">Login</label>
+          <input type="text" id="login" name="login" placeholder="Seu login" required/>
+        </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" placeholder="Sua senha" required/>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem">
+          Entrar
+        </button>
+      </form>
+
+      <div class="auth-footer-link">
+        Não tem conta? <a href="/cadastro">Cadastre-se</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">Node.js · EJS · SQLite</footer>
+</body>
+</html>

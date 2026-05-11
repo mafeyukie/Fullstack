@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerência de Carros</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">my<span>Carros</span></span>
+      <nav class="header-nav">
+        <a href="/">Projects</a>
+        <a href="/carros">Catálogo</a>
+        <a href="/gerencia" class="active">Gerência</a>
+      </nav>
+      <div class="header-user">
+        Olá, <strong><%= usuario.nome.split(' ')[0] %></strong>
+        <a href="/logout" class="btn-logout">Sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div class="page-title">Gerência <span>de Carros</span></div>
+        <p class="page-sub">Cadastre, edite, remova ou venda os veículos.</p>
+      </div>
+      <a href="/carros" class="btn btn-outline">← Ver catálogo público</a>
+    </div>
+
+    <% if (msg) { %>
+      <% const msgs = { criado:'✅ Carro cadastrado!', atualizado:'✅ Carro atualizado!', removido:'🗑 Carro removido.' }; %>
+      <div class="alert alert-ok"><%= msgs[msg] || msg %></div>
+    <% } %>
+    <% if (erro) { %>
+      <div class="alert alert-err">⚠ Erro: <%= erro === 'campos' ? 'Preencha todos os campos.' : erro %></div>
+    <% } %>
+
+    <!-- ── Cadastrar novo carro ─────────────────── -->
+    <div style="margin-bottom:2.5rem">
+      <div class="section-title">Cadastrar novo carro</div>
+      <div class="form-card">
+        <form action="/carros/criar" method="POST">
+          <div class="form-grid" style="margin-bottom:1.25rem">
+            <div class="field">
+              <label for="marca">Marca</label>
+              <input type="text" id="marca" name="marca" placeholder="Ex: Toyota" required/>
+            </div>
+            <div class="field">
+              <label for="modelo">Modelo</label>
+              <input type="text" id="modelo" name="modelo" placeholder="Ex: Corolla" required/>
+            </div>
+            <div class="field">
+              <label for="ano">Ano</label>
+              <input type="number" id="ano" name="ano" placeholder="Ex: 2023" min="1900" max="2100" required/>
+            </div>
+            <div class="field">
+              <label for="qtde_disponivel">Qtde. disponível</label>
+              <input type="number" id="qtde_disponivel" name="qtde_disponivel" placeholder="Ex: 5" min="0" required/>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">＋ Cadastrar carro</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ── Lista de carros ─────────────────────── -->
+    <div class="section-title">Carros cadastrados (<%= carros.length %>)</div>
+
+    <% if (carros.length === 0) { %>
+      <div style="text-align:center;padding:3rem;color:var(--muted);border:1px dashed var(--border);border-radius:12px">
+        Nenhum carro cadastrado ainda.
+      </div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th><th>Marca</th><th>Modelo</th><th>Ano</th>
+              <th>Estoque</th><th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% carros.forEach(function(carro) { %>
+              <tr id="row-<%= carro.id %>">
+                <td style="color:var(--muted);font-family:var(--mono)">#<%= carro.id %></td>
+                <td style="font-weight:700"><%= carro.marca %></td>
+                <td><%= carro.modelo %></td>
+                <td><%= carro.ano %></td>
+                <td>
+                  <div class="qty-cell">
+                    <span id="gqty-<%= carro.id %>" class="car-qty-val <%= carro.qtde_disponivel > 0 ? 'qty-ok' : 'qty-out' %>">
+                      <%= carro.qtde_disponivel %>
+                    </span>
+                    <% if (carro.qtde_disponivel <= 0) { %>
+                      <span class="badge badge-out" id="gesgotado-<%= carro.id %>">Esgotado</span>
+                    <% } else { %>
+                      <span class="badge badge-ok" id="gesgotado-<%= carro.id %>" style="display:none">Esgotado</span>
+                    <% } %>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+                    <!-- Editar -->
+                    <a href="/carros/editar/<%= carro.id %>" class="btn btn-edit btn-sm">✏ Editar</a>
+
+                    <!-- Vender -->
+                    <% if (carro.qtde_disponivel > 0) { %>
+                      <button
+                        class="btn btn-sell btn-sm"
+                        id="gbtn-<%= carro.id %>"
+                        onclick="venderGerencia(<%= carro.id %>)"
+                      >🤝 Vender</button>
+                    <% } else { %>
+                      <button class="btn btn-sell btn-sm" id="gbtn-<%= carro.id %>" disabled style="opacity:.4">🤝 Vender</button>
+                    <% } %>
+
+                    <!-- Remover -->
+                    <form action="/carros/remover/<%= carro.id %>" method="POST"
+                          onsubmit="return confirm('Remover <%= carro.marca %> <%= carro.modelo %>?')">
+                      <button type="submit" class="btn btn-danger btn-sm">🗑 Remover</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </main>
+
+  <footer class="site-footer">Node.js · EJS · SQLite</footer>
+
+  <script>
+    async function venderGerencia(id) {
+      const btn      = document.getElementById('gbtn-' + id);
+      const qtyEl    = document.getElementById('gqty-' + id);
+      const esgotado = document.getElementById('gesgotado-' + id);
+
+      btn.disabled = true;
+      const res  = await fetch('/carros/vender/' + id, { method: 'POST' });
+      const data = await res.json();
+
+      if (data.ok) {
+        const novaQty = parseInt(qtyEl.textContent.trim()) - 1;
+        qtyEl.textContent = novaQty;
+        if (novaQty <= 0) {
+          qtyEl.className = 'car-qty-val qty-out';
+          esgotado.style.display = 'inline-block';
+        } else {
+          btn.disabled = false;
+        }
+      } else {
+        alert(data.msg);
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="blog-page">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">my<em>blog</em></span>
+      <nav>
+        <a href="/">Projects</a>
+        <a href="/blog" class="active">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="blog-main">
+    <div class="blog-hero">
+      <h1>Blog</h1>
+      <p><%= posts.length %> post<%= posts.length !== 1 ? 's' : '' %> publicado<%= posts.length !== 1 ? 's' : '' %>.</p>
+      <a href="/cadastrar_post" class="btn-novo-post">+ Novo Post</a>
+    </div>
+
+    <section class="posts-grid">
+
+      <% if (posts.length === 0) { %>
+        <div class="empty-state">
+          <span class="empty-icon">📝</span>
+          <h2>Nenhum post ainda</h2>
+          <p>Seja o primeiro a publicar algo!</p>
+          <a href="/cadastrar_post" class="btn-novo-post">Criar primeiro post</a>
+        </div>
+      <% } else { %>
+
+        <% posts.forEach(function(post, index) { %>
+          <article class="post-card" style="animation-delay: <%= index * 0.07 %>s">
+            <div class="post-meta">
+              <span class="post-num">#<%= String(post.id).padStart(2, '0') %></span>
+              <span class="post-date"><%= post.criado_em %></span>
+            </div>
+            <h2 class="post-titulo"><%= post.titulo %></h2>
+            <p class="post-resumo"><%= post.resumo %></p>
+            <details class="post-conteudo-toggle">
+              <summary>Ler mais</summary>
+              <div class="post-conteudo"><%= post.conteudo %></div>
+            </details>
+          </article>
+        <% }); %>
+
+      <% } %>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Node.js · EJS · SQLite</p>
+  </footer>
+
+</body>
+</html>

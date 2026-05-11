@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carros Disponíveis</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">my<span>Carros</span></span>
+      <nav class="header-nav">
+        <a href="/">Projects</a>
+        <a href="/carros" class="active">Carros</a>
+        <% if (usuario) { %>
+          <a href="/gerencia">Gerência</a>
+        <% } else { %>
+          <a href="/login">Login</a>
+        <% } %>
+      </nav>
+      <% if (usuario) { %>
+        <div class="header-user">
+          Olá, <strong><%= usuario.nome.split(' ')[0] %></strong>
+          <a href="/logout" class="btn-logout">Sair</a>
+        </div>
+      <% } %>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-title">Carros <span>Disponíveis</span></div>
+    <p class="page-sub"><%= carros.length %> modelo<%= carros.length !== 1 ? 's' : '' %> no catálogo.</p>
+
+    <% if (carros.length === 0) { %>
+      <div style="text-align:center;padding:5rem 2rem;color:var(--muted)">
+        <div style="font-size:3rem;margin-bottom:1rem">🚗</div>
+        <p>Nenhum carro cadastrado ainda.</p>
+        <% if (usuario) { %>
+          <a href="/gerencia" class="btn btn-primary" style="margin-top:1.5rem">Cadastrar carros</a>
+        <% } %>
+      </div>
+    <% } else { %>
+      <div class="cars-grid">
+        <% carros.forEach(function(carro, i) { %>
+          <div class="car-card" style="animation-delay:<%= i * 0.06 %>s" id="card-<%= carro.id %>">
+            <div class="car-brand"><%= carro.marca %></div>
+            <div class="car-model"><%= carro.modelo %></div>
+            <div class="car-year">Ano <%= carro.ano %></div>
+            <div class="car-qty">
+              <span class="car-qty-label">Estoque</span>
+              <span class="car-qty-val <%= carro.qtde_disponivel > 0 ? 'qty-ok' : 'qty-out' %>" id="qty-<%= carro.id %>">
+                <%= carro.qtde_disponivel %>
+              </span>
+            </div>
+            <% if (carro.qtde_disponivel <= 0) { %>
+              <span class="esgotado-tag" id="esgotado-<%= carro.id %>">⚠ Esgotado</span>
+            <% } else { %>
+              <span class="esgotado-tag" id="esgotado-<%= carro.id %>" style="display:none">⚠ Esgotado</span>
+              <button
+                class="btn btn-sell btn-vender-card"
+                onclick="vender(<%= carro.id %>)"
+                id="btn-<%= carro.id %>"
+              >🤝 Vender</button>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </main>
+
+  <footer class="site-footer">Node.js · EJS · SQLite</footer>
+
+  <script>
+    async function vender(id) {
+      const btn      = document.getElementById('btn-' + id);
+      const qtyEl    = document.getElementById('qty-' + id);
+      const esgotado = document.getElementById('esgotado-' + id);
+
+      btn.disabled = true;
+      btn.textContent = 'Aguarde...';
+
+      const res  = await fetch('/carros/vender/' + id, { method: 'POST' });
+      const data = await res.json();
+
+      if (data.ok) {
+        const novaQty = parseInt(qtyEl.textContent) - 1;
+        qtyEl.textContent = novaQty;
+        if (novaQty <= 0) {
+          qtyEl.className = 'car-qty-val qty-out';
+          btn.style.display = 'none';
+          esgotado.style.display = 'block';
+        } else {
+          btn.disabled = false;
+          btn.textContent = '🤝 Vender';
+        }
+      } else {
+        alert(data.msg);
+        btn.disabled = false;
+        btn.textContent = '🤝 Vender';
+      }
+    }
+  </script>
+</body>
+</html>
